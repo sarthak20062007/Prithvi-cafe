@@ -31,7 +31,7 @@ export default function ArtisticStory() {
           {/* Left: Text + Timeline */}
           <div>
             <motion.h3
-              className="font-[family-name:var(--font-display)] text-5xl md:text-6xl text-on-surface mb-8 leading-tight"
+              className="font-[family-name:var(--font-display)] text-4xl md:text-5xl lg:text-6xl text-on-surface mb-8 leading-tight"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -115,7 +115,7 @@ export default function ArtisticStory() {
                 alt="Atmospheric interior of Prithvi Theatre with vintage posters and plush seating"
               />
             </div>
-            <div className="absolute -bottom-8 -left-8 glass-card p-8 rounded-sm max-w-[240px]">
+            <div className="absolute -bottom-4 left-4 md:-bottom-8 md:-left-8 glass-card p-6 md:p-8 rounded-sm max-w-[200px] md:max-w-[240px]">
               <p className="font-[family-name:var(--font-display)] italic text-lg text-primary">
                 &ldquo;Art is not what you see, but what you make others
                 see.&rdquo;

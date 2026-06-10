@@ -120,7 +120,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.h2
-          className="font-[family-name:var(--font-display)] text-5xl md:text-7xl text-on-surface leading-[1.1]"
+          className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl md:text-7xl text-on-surface leading-[1.1]"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{

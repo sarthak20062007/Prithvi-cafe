@@ -16,7 +16,7 @@ export default function BottomNav() {
         <a
           key={item.label}
           href={item.href}
-          className={`flex flex-col items-center justify-center ${
+          className={`flex flex-col items-center justify-center py-2 min-h-[44px] ${
             item.active
               ? "text-primary"
               : "text-on-surface-variant opacity-60"

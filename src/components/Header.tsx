@@ -92,7 +92,7 @@ export default function Header() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`block font-[family-name:var(--font-display)] text-5xl ${
+                  className={`block font-[family-name:var(--font-display)] text-4xl sm:text-5xl ${
                     link.active ? "text-primary" : "text-on-surface"
                   }`}
                   initial={{ opacity: 0, y: 10 }}

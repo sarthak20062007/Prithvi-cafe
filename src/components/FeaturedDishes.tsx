@@ -54,7 +54,7 @@ export default function FeaturedDishes() {
           {dishes.map((dish, i) => (
             <motion.div
               key={dish.name}
-              className="min-w-[320px] snap-center group"
+              className="w-[85vw] min-w-[85vw] sm:w-[320px] sm:min-w-[320px] snap-center group shrink-0"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}

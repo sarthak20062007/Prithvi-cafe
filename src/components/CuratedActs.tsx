@@ -60,7 +60,7 @@ export default function CuratedActs() {
             return (
               <motion.div
                 key={event.title}
-                className="min-w-[340px] snap-center glass-card p-10 rounded-sm"
+                className="w-[85vw] min-w-[85vw] sm:w-[340px] sm:min-w-[340px] snap-center glass-card p-8 sm:p-10 rounded-sm shrink-0"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}

@@ -12,13 +12,13 @@ export default function Reservation() {
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="glass-card p-12 md:p-20 rounded-sm border-white/5 relative overflow-hidden">
+        <div className="glass-card p-6 sm:p-8 md:p-12 lg:p-20 rounded-sm border-white/5 relative overflow-hidden">
           {/* Decorative Glow */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
           {/* Header */}
           <div className="text-center space-y-4 mb-16 relative">
-            <h3 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl text-primary">
+            <h3 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl text-primary">
               Table Reservation
             </h3>
             <p className="text-on-surface-variant font-light max-w-sm mx-auto">
