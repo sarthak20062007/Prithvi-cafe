@@ -1,8 +1,42 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import {
+  reservationSchema,
+  GUEST_OPTIONS,
+} from "@/lib/validations/reservationSchema";
 
 export default function Reservation() {
+  const [guestCount, setGuestCount] = useState<string>(GUEST_OPTIONS[0]);
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setErrors({});
+
+    const result = reservationSchema.safeParse({ guestCount, date, time });
+
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      for (const issue of result.error.issues) {
+        const field = issue.path[0];
+        if (field && !fieldErrors[String(field)]) {
+          fieldErrors[String(field)] = issue.message;
+        }
+      }
+      setErrors(fieldErrors);
+      return;
+    }
+
+    // Validation passed — show confirmation
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000);
+  }
+
   return (
     <section id="reservation" className="py-20 md:py-24 px-5 md:px-6">
       <motion.div
@@ -28,18 +62,27 @@ export default function Reservation() {
           </div>
 
           {/* Form */}
-          <form className="space-y-10 relative" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-10 relative" onSubmit={handleSubmit} noValidate>
             <div className="grid md:grid-cols-2 gap-10">
               <div className="space-y-4">
                 <label className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] block">
                   Guest Count
                 </label>
-                <select className="w-full bg-transparent border-b border-white/10 text-on-surface py-4 focus:border-primary outline-none appearance-none cursor-pointer font-[family-name:var(--font-body)]">
+                <select
+                  className="w-full bg-transparent border-b border-white/10 text-on-surface py-4 focus:border-primary outline-none appearance-none cursor-pointer font-[family-name:var(--font-body)]"
+                  value={guestCount}
+                  onChange={(e) => setGuestCount(e.target.value)}
+                >
                   <option>2 Guests</option>
                   <option>4 Guests</option>
                   <option>6 Guests</option>
                   <option>Exclusive Party (8+)</option>
                 </select>
+                {errors.guestCount && (
+                  <p className="text-error text-[10px] uppercase tracking-widest mt-1">
+                    {errors.guestCount}
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-6">
@@ -50,7 +93,14 @@ export default function Reservation() {
                   <input
                     className="w-full bg-transparent border-b border-white/10 text-on-surface py-4 focus:border-primary outline-none font-[family-name:var(--font-body)]"
                     type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
                   />
+                  {errors.date && (
+                    <p className="text-error text-[10px] uppercase tracking-widest mt-1">
+                      {errors.date}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-4">
                   <label className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] block">
@@ -59,7 +109,14 @@ export default function Reservation() {
                   <input
                     className="w-full bg-transparent border-b border-white/10 text-on-surface py-4 focus:border-primary outline-none font-[family-name:var(--font-body)]"
                     type="time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
                   />
+                  {errors.time && (
+                    <p className="text-error text-[10px] uppercase tracking-widest mt-1">
+                      {errors.time}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -69,7 +126,7 @@ export default function Reservation() {
                 type="submit"
                 className="w-full bg-primary text-background font-bold text-xs py-6 rounded-sm uppercase tracking-[0.3em] gold-shimmer active:scale-95 transition-all shadow-[0_15px_40px_rgba(242,202,80,0.15)]"
               >
-                Confirm Your Presence
+                {submitted ? "Reservation Confirmed ✓" : "Confirm Your Presence"}
               </button>
               <p className="text-[10px] text-center text-on-surface-variant mt-6 uppercase tracking-widest opacity-50">
                 Reservation held for 15 minutes past scheduled time
