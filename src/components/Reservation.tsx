@@ -85,7 +85,7 @@ export default function Reservation() {
                 )}
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <label className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] block">
                     Date

@@ -28,7 +28,7 @@ const securityHeaders = [
       "base-uri 'self'",
       "form-action 'self'",
       "frame-ancestors 'none'",
-      "upgrade-insecure-requests",
+      ...(process.env.NODE_ENV === "production" ? ["upgrade-insecure-requests"] : []),
     ].join("; "),
   },
   {
@@ -78,6 +78,12 @@ const securityHeaders = [
 // ---------------------------------------------------------------------------
 
 const nextConfig: NextConfig = {
+  // Disable dev indicators that overlap with mobile navigation
+  devIndicators: {
+    buildActivity: false,
+    appIsrStatus: false,
+  },
+
   // Remove X-Powered-By header to avoid exposing the framework
   poweredByHeader: false,
 
@@ -92,7 +98,7 @@ const nextConfig: NextConfig = {
   },
 
   // Dev origins for local development
-  allowedDevOrigins: ["192.168.1.105", "192.168.1.105:3001", "localhost:3001"],
+  allowedDevOrigins: ["192.168.1.105", "192.168.1.105:3001", "192.168.1.106", "192.168.1.106:3000", "192.168.1.106:3001", "localhost:3001", "localhost:3000"],
 };
 
 export default nextConfig;

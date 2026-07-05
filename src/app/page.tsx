@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main className="pb-24 lg:pb-0">
         <Hero />
         <FeaturedDishes />
         <ArtisticStory />
