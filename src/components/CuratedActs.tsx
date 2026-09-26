@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import SecureEntryModal, { type EventData } from "./SecureEntryModal";
 
-const events = [
+const events: EventData[] = [
   {
     tag: "Drama",
     tagColor: "primary",
@@ -12,6 +14,8 @@ const events = [
     description:
       "A minimalist dramatic journey exploring Mumbai's forgotten heritage through poetic movement.",
     buttonText: "Secure Entry",
+    time: "7:30 PM",
+    venue: "Prithvi Theatre, Juhu",
   },
   {
     tag: "Acoustic",
@@ -22,10 +26,24 @@ const events = [
     description:
       "Unplugged sessions featuring independent artists in an intimate candlelit garden setting.",
     buttonText: "Secure Entry",
+    time: "8:00 PM",
+    venue: "Prithvi Cafe Garden",
   },
 ];
 
 export default function CuratedActs() {
+  const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function handleSecureEntry(event: EventData) {
+    setSelectedEvent(event);
+    setIsModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsModalOpen(false);
+  }
+
   return (
     <section id="events" className="py-20 md:py-24 bg-primary/5">
       <div className="max-w-7xl mx-auto px-5 md:px-6">
@@ -105,6 +123,7 @@ export default function CuratedActs() {
 
                 {/* Button */}
                 <button
+                  onClick={() => handleSecureEntry(event)}
                   className={`w-full py-4 border ${
                     isPrimary
                       ? "border-primary/30 text-primary hover:bg-primary hover:text-background"
@@ -118,6 +137,13 @@ export default function CuratedActs() {
           })}
         </div>
       </div>
+
+      {/* Secure Entry Modal */}
+      <SecureEntryModal
+        event={selectedEvent}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </section>
   );
 }

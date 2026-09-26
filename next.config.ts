@@ -78,10 +78,9 @@ const securityHeaders = [
 // ---------------------------------------------------------------------------
 
 const nextConfig: NextConfig = {
-  // Disable dev indicators that overlap with mobile navigation
+  // Disable dev indicators positioning if needed
   devIndicators: {
-    buildActivity: false,
-    appIsrStatus: false,
+    position: "bottom-right",
   },
 
   // Remove X-Powered-By header to avoid exposing the framework
